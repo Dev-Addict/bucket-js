@@ -44,23 +44,33 @@ describe('Attribute Parser Function', () => {
 	});
 
 	test('it should add a empty array attribute to element', () => {
-		const valueArray: Value[] = [];
+		const valueArray: Value = [];
 		attributeParser(element, 'key([])');
 
 		expect(element.key).toEqual(valueArray);
 	});
 
 	test('it should add a array attribute to element', () => {
-		const valueArray: Value[] = [123, 'value', true];
+		const valueArray: Value = [123, 'value', true];
 		attributeParser(element, 'key([123, "value", True])');
 
 		expect(element.key).toEqual(valueArray);
 	});
 
 	test('it should add a multi array attribute to element', () => {
-		const valueArray: Value[] = [123, 'value', true, [123, 'value', true]];
+		const valueArray: Value = [123, 'value', true, [123, 'value', true]];
 		attributeParser(element, 'key([123, "value", True, [123, "value", True]])');
 
 		expect(element.key).toEqual(valueArray);
+	});
+
+	test('it should add a element attribute to element', () => {
+		const valueElement: Value = {
+			element: 'element',
+			value: 'value',
+		};
+		attributeParser(element, 'key(element ("value"))');
+
+		expect(element.key).toEqual(valueElement);
 	});
 });

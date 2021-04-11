@@ -72,4 +72,23 @@ element
 			},
 		]);
 	});
+
+	test('it should parse with element value', () => {
+		expect(
+			bucketParser(`
+element 
+	key("value") 
+	(element ("value"))
+		`)
+		).toEqual([
+			{
+				element: 'element',
+				value: {
+					element: 'element',
+					value: 'value',
+				},
+				key: 'value',
+			},
+		]);
+	});
 });

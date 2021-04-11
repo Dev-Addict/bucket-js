@@ -50,7 +50,7 @@ describe('Line Parser Function', () => {
 	});
 
 	test('it should parse a line with element and value of empty array', () => {
-		const array: Value[] = [];
+		const array: Value = [];
 
 		expect(lineParser(`element ([${array.join(',')}])`)).toEqual({
 			element: 'element',
@@ -59,7 +59,7 @@ describe('Line Parser Function', () => {
 	});
 
 	test('it should parse a line with element and value of array', () => {
-		const array: Value[] = [123, true, 'value'];
+		const array: Value = [123, true, 'value'];
 
 		expect(lineParser(`element ([123, True, "value"])`)).toEqual({
 			element: 'element',
@@ -68,7 +68,7 @@ describe('Line Parser Function', () => {
 	});
 
 	test('it should parse a line with element and value of multi array', () => {
-		const array: Value[] = [123, true, 'value', [123, true, 'value']];
+		const array: Value = [123, true, 'value', [123, true, 'value']];
 
 		expect(
 			lineParser(`element ([123, True, "value", [123, True, "value"]])`)
@@ -125,7 +125,7 @@ describe('Line Parser Function', () => {
 	});
 
 	test('it should parse a line with element and attribute of empty array', () => {
-		const array: Value[] = [];
+		const array: Value = [];
 
 		expect(lineParser(`element key([])`)).toEqual({
 			element: 'element',
@@ -135,7 +135,7 @@ describe('Line Parser Function', () => {
 	});
 
 	test('it should parse a line with element and attribute of array', () => {
-		const array: Value[] = [123, true, 'value'];
+		const array: Value = [123, true, 'value'];
 
 		expect(lineParser(`element key([123, True, "value"])`)).toEqual({
 			element: 'element',
@@ -145,7 +145,7 @@ describe('Line Parser Function', () => {
 	});
 
 	test('it should parse a line with element and attribute of multi array', () => {
-		const array: Value[] = [123, true, 'value', [123, true, 'value']];
+		const array: Value = [123, true, 'value', [123, true, 'value']];
 
 		expect(
 			lineParser(`element key([123, True, "value", [123, True, "value"]])`)
@@ -153,6 +153,31 @@ describe('Line Parser Function', () => {
 			element: 'element',
 			value: undefined,
 			key: array,
+		});
+	});
+
+	test('it should parse a line with element and value of element', () => {
+		const element: Value = {
+			element: 'element',
+			value: 'value',
+		};
+
+		expect(lineParser(`element (element ("value"))`)).toEqual({
+			element: 'element',
+			value: element,
+		});
+	});
+
+	test('it should parse a line with element and attribute of element', () => {
+		const element: Value = {
+			element: 'element',
+			value: 'value',
+		};
+
+		expect(lineParser(`element key(element ("value"))`)).toEqual({
+			element: 'element',
+			value: undefined,
+			key: element,
 		});
 	});
 });

@@ -1,3 +1,4 @@
+import {lineParser} from './line.parser';
 import {Boolean, Value} from '../types';
 
 export const valueParser = (value: string): Value => {
@@ -12,5 +13,6 @@ export const valueParser = (value: string): Value => {
 			.split(/[,](?=[^\]]*?(?:\[|$))/)
 			.map((item) => !!item && valueParser(item.trim()))
 			.filter((item) => item);
+	else if (value.length) return lineParser(value);
 	return undefined;
 };

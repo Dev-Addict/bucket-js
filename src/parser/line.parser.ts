@@ -1,5 +1,6 @@
-import {Element} from '../types';
 import {attributeParser} from './attribute.parser';
+import {splitSpaces} from '../utils';
+import {Element} from '../types';
 
 export const lineParser = (line: string): Element => {
 	const result: Element = {
@@ -15,11 +16,11 @@ export const lineParser = (line: string): Element => {
 	line = line.substring(indexOfSpace === -1 ? line.length : indexOfSpace);
 	result.element = element;
 
-	line
-		.replace(/([([])\s+|\s+([)\]])|([([])\s+([)\]])/g, '$1$2')
-		.replace(/,\s+"/g, ',"')
-		.split(/[ ](?=[^)]*?(?:\(|$))/)
-		.map(attributeParser.bind(this, result));
+	splitSpaces(
+		line
+			.replace(/([([])\s+|\s+([)\]])|([([])\s+([)\]])/g, '$1$2')
+			.replace(/,\s+"/g, ',"')
+	).map(attributeParser.bind(this, result));
 
 	return result;
 };

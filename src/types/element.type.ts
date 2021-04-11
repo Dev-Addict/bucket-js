@@ -1,4 +1,4 @@
-export type Value = string | number | boolean | Value[] | undefined;
+export type Value = string | number | boolean | undefined | Element | Value[];
 
 export interface Element {
 	element: string;

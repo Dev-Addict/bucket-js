@@ -30,23 +30,33 @@ describe('Value Parser Function', () => {
 	});
 
 	test('it should parse a empty array value', () => {
-		const valueArray: Value[] = [];
+		const valueArray: Value = [];
 		const value = '[]';
 
 		expect(valueParser(value)).toEqual(valueArray);
 	});
 
 	test('it should parse a array value', () => {
-		const valueArray: Value[] = [123, 'value', true];
+		const valueArray: Value = [123, 'value', true];
 		const value = '[123, "value", True]';
 
 		expect(valueParser(value)).toEqual(valueArray);
 	});
 
 	test('it should parse a multi array value', () => {
-		const valueArray: Value[] = [123, 'value', true, [123, 'value', true]];
+		const valueArray: Value = [123, 'value', true, [123, 'value', true]];
 		const value = '[123, "value", True, [123, "value", True]]';
 
 		expect(valueParser(value)).toEqual(valueArray);
+	});
+
+	test('it should parse a element value', () => {
+		const element: Value = {
+			element: 'element',
+			value: 'value',
+		};
+		const value = 'element ("value")';
+
+		expect(valueParser(value)).toEqual(element);
 	});
 });

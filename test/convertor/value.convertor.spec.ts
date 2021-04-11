@@ -32,9 +32,9 @@ describe('Value Convertor Function', () => {
 	});
 
 	test('it should return stringify array for array input', () => {
-		const array1: Value[] = [];
-		const array2: Value[] = [123, 'string', false];
-		const array3: Value[] = [123, 'string', false, [123, 'string', false]];
+		const array1: Value = [];
+		const array2: Value = [123, 'string', false];
+		const array3: Value = [123, 'string', false, [123, 'string', false]];
 
 		const array1Result = '[]';
 		const array2Result = '[123, "string", False]';
@@ -43,5 +43,16 @@ describe('Value Convertor Function', () => {
 		expect(valueConvertor(array1)).toEqual(array1Result);
 		expect(valueConvertor(array2)).toEqual(array2Result);
 		expect(valueConvertor(array3)).toEqual(array3Result);
+	});
+
+	test('it should return stringify element for element input', () => {
+		const element: Value = {
+			element: 'element',
+			value: 'value',
+		};
+
+		const result = 'element ("value")';
+
+		expect(valueConvertor(element)).toEqual(result);
 	});
 });

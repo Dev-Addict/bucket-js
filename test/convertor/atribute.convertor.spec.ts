@@ -46,11 +46,24 @@ describe('Attribute Convertor Function', () => {
 		expect(attributeConvertor(prevResult, key, value)).toEqual(result);
 	});
 
-	test('it should add attribute to result with boolean array value', () => {
+	test('it should add attribute to result with multi array value', () => {
 		const prevResult = '';
 		const key = 'key';
-		const value: Value[] = [123, 'string', false, [123, 'string', false]];
+		const value: Value = [123, 'string', false, [123, 'string', false]];
 		const stringifyValue = '[123, "string", False, [123, "string", False]]';
+		const result = `${prevResult} ${key}(${stringifyValue})`;
+
+		expect(attributeConvertor(prevResult, key, value)).toEqual(result);
+	});
+
+	test('it should add attribute to result with element value', () => {
+		const prevResult = '';
+		const key = 'key';
+		const value: Value = {
+			element: 'element',
+			value: 'value',
+		};
+		const stringifyValue = 'element ("value")';
 		const result = `${prevResult} ${key}(${stringifyValue})`;
 
 		expect(attributeConvertor(prevResult, key, value)).toEqual(result);
