@@ -1,4 +1,4 @@
-import {lineToElementParser} from './line-to-element.parser';
+import {lineParser} from './line.parser';
 
 export const bucketParser = (bucket: string) => {
 	const lines: string[][] = [];
@@ -10,5 +10,5 @@ export const bucketParser = (bucket: string) => {
 
 	return lines
 		.map((lines) => lines.map((line) => line.trim()).join(' '))
-		.map((element) => lineToElementParser(element));
+		.map((element) => lineParser(element));
 };
