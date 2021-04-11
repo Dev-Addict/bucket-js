@@ -1,0 +1,17 @@
+{
+  "name": "bucket-js",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "ts-node src/index.ts",
+    "build": "tsc"
+  },
+  "description": "bucket markup language js library",
+  "main": "dist/index.js",
+  "repository": "https://github.com/Dev-Addict/bucket-js",
+  "author": "Aria Azadi Pour(GitHub: Dev-Addict)",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^14.14.37",
+    "typescript": "^4.2.4"
+  }
+}
